@@ -1,0 +1,15 @@
+{% block content %}
+
+<html>
+<head>
+<title></title>
+</head>
+<h3>Are you sure?</h3>
+
+<body>
+  <form method="post"> {% csrf_token %}
+<button type="submit" formaction=''>Yes</button>
+  </form>
+</body>
+</html>
+{% endblock %}
