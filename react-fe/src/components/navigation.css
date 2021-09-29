@@ -1,0 +1,8 @@
+.active {
+    color: rosybrown;
+}
+
+.img-thumbnail {
+    max-width: 120%;
+    height: 40px;
+}
