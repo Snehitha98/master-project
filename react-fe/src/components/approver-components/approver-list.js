@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Pagination from '../../components/pagination';
 import { Table, Button, Container } from 'react-bootstrap';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +14,14 @@ function ApproverList(props) {
   // Get current transfer evals
   const indexOfLastApprover = currentPage * approversPerPage;
   const indexOfFirstApprover = indexOfLastApprover - approversPerPage;
-  const currentApprovers = props.approvers.slice(indexOfFirstApprover, indexOfLastApprover);
+  // const currentApprovers = props.approvers.slice(indexOfFirstApprover, indexOfLastApprover);
+
+  const [currentApprovers,setcurrentApprovers] = useState(props.approvers.slice(indexOfFirstApprover, indexOfLastApprover));
+
+  useEffect(() => {
+    setcurrentApprovers(props.approvers.slice(indexOfFirstApprover, indexOfLastApprover));
+  }, [props.approvers,currentPage])
+
 
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -41,22 +48,48 @@ function ApproverList(props) {
     props.newApprover();
   }
 
+  function compareaescApprover( a, b ) {
+    if ( a.approver_name < b.approver_name ){
+      return -1;
+    }
+    if ( a.approver_name > b.approver_name ){
+      return 1;
+    }
+    return 0;
+  }
+
+  function comparedescApprover( a, b ) {
+    if ( a.approver_name < b.approver_name ){
+      return 1;
+    }
+    if ( a.approver_name > b.approver_name ){
+      return -1;
+    }
+    return 0;
+  }
+
   return (
     <Container>
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th onClick={() => window.location.reload(false)}>APPROVER NAME</th>
-          <th />
+          <th>
+            <div>APPROVER NAME <br></br>
+            <Button variant="outline-secondary" onClick={() => {setcurrentApprovers(props.approvers.sort( comparedescApprover ).slice(indexOfFirstApprover, indexOfLastApprover))}}>desc</Button>
+              &nbsp;&nbsp;
+            <Button variant="outline-secondary" onClick={() => {setcurrentApprovers(props.approvers.sort( compareaescApprover ).slice(indexOfFirstApprover, indexOfLastApprover))}}>asc</Button>
+            </div>
+            </th>
+          <th/>
           <th>
             <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newApprover}/>
           </th>
         </tr>
       </thead>
       <tbody>
-        { currentApprovers && currentApprovers.map( approver => {
+        { currentApprovers && currentApprovers.map( (approver,i) => {
           return (
-            <tr>
+            <tr key={i}>
               <td onClick={approverClicked(approver)}>
                 {approver.approver_name}
               </td>
@@ -71,7 +104,7 @@ function ApproverList(props) {
         })}
       </tbody>
     </Table>
-    <Pagination elementsPerPage={approversPerPage} totalElements={props.approvers.length} paginate={paginate} url='approver/!#'/>
+      <Pagination elementsPerPage={approversPerPage} totalElements={props.approvers.length} paginate={paginate} url='approver/!#'/>
     </Container>
   )
 }
