@@ -57,6 +57,7 @@ function MajorRequirememnt() {
       setMajorReqs(newMajorReqs);
     }
 
+
     return (
         <div className="list-group">
           <br/>

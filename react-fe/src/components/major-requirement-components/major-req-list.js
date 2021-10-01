@@ -21,6 +21,10 @@ function MajorRequirementList(props) {
     const [selectedMajorName, setselectedMajorName] = useState('');
     const [majorNamesArr,setmajorNamesArr] = useState(['select']);
 
+    useEffect(() => {
+        setcurrentMajorReqs(props.majorReqs.slice(indexOfFirstMajorReq, indexOfLastMajorReq));
+    }, [props.majorReqs,currentPage])
+
 
     useEffect(() => {
         let temp = props.majorReqs;
@@ -82,6 +86,46 @@ function MajorRequirementList(props) {
         props.newMajorReq();
     }
 
+    function compareaescMajor( a, b ) {
+        if ( a.major_name < b.major_name ){
+          return -1;
+        }
+        if ( a.major_name > b.major_name ){
+          return 1;
+        }
+        return 0;
+    }
+
+    function comparedescMajor( a, b ) {
+        if ( a.major_name < b.major_name ){
+          return 1;
+        }
+        if ( a.major_name > b.major_name ){
+          return -1;
+        }
+        return 0;
+    }
+
+    function compareaescMajorReq( a, b ) {
+        if ( a.description < b.description ){
+          return -1;
+        }
+        if ( a.description > b.description ){
+          return 1;
+        }
+        return 0;
+    }
+
+  function comparedescMajorReq( a, b ) {
+        if ( a.description < b.description ){
+          return 1;
+        }
+        if ( a.description > b.description ){
+          return -1;
+        }
+        return 0;
+    }
+
     return (
         <Container>
             <Form style={{ display: 'flex',alignItems:'center'}}>
@@ -94,8 +138,20 @@ function MajorRequirementList(props) {
         <Table striped bordered hover>
             <thead>
                 <tr>
-                    <th onClick={() => window.location.reload(false)}>MAJOR REQUIREMENT</th>
-                    <th>MAJOR NAME</th>
+                    <th>
+                    <div>MAJOR REQUIREMENT<br></br>
+                    <Button variant="outline-secondary" onClick={() => {setcurrentMajorReqs(props.majorReqs.sort( compareaescMajorReq ).slice(indexOfFirstMajorReq, indexOfLastMajorReq))}}>asc</Button>
+                      &nbsp;&nbsp;
+                    <Button variant="outline-secondary" onClick={() => {setcurrentMajorReqs(props.majorReqs.sort( comparedescMajorReq ).slice(indexOfFirstMajorReq, indexOfLastMajorReq))}}>desc</Button>
+                    </div>
+                    </th>
+                    <th>
+                    <div>MAJOR NAME<br></br>
+                    <Button variant="outline-secondary" onClick={() => {setcurrentMajorReqs(props.majorReqs.sort( compareaescMajor ).slice(indexOfFirstMajorReq, indexOfLastMajorReq))}}>asc</Button>
+                      &nbsp;&nbsp;
+                    <Button variant="outline-secondary" onClick={() => {setcurrentMajorReqs(props.majorReqs.sort( comparedescMajor ).slice(indexOfFirstMajorReq, indexOfLastMajorReq))}}>desc</Button>
+                    </div>
+                    </th>
                     <th/>
                     <th>
                         <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newMajorReq}/>
