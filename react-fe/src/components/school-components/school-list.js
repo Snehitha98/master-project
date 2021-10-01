@@ -1,11 +1,20 @@
-import React from 'react';
-import { Table } from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import {Container, Table} from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { API } from '../../api-services/school-services';
 
 function SchoolList(props) {
+
+    const [currentPage, setCurrentPage] = useState();
+    const [schoolsPerPage] = useState();
+
+    // Get current Schools
+    const indexOfLastSchool = currentPage * schoolsPerPage;
+    const indexOfFirstSchool = indexOfLastSchool - schoolsPerPage;
+
+    const [currentSchools,setcurrentSchools] = useState(props.schools);
 
     const schoolClicked = school => evt => {
         props.schoolClicked(school);
@@ -30,11 +39,38 @@ function SchoolList(props) {
         props.newSchool();
     }
 
+    function compareaescSchool( a, b ) {
+    if ( a.school_name < b.school_name ){
+      return -1;
+    }
+    if ( a.school_name > b.school_name ){
+      return 1;
+    }
+    return 0;
+  }
+
+  function comparedescSchool( a, b ) {
+    if ( a.school_name < b.school_name ){
+      return 1;
+    }
+    if ( a.school_name > b.school_name ){
+      return -1;
+    }
+    return 0;
+  }
+
     return (
+        <Container>
         <Table striped bordered hover>
             <thead>
                 <tr>
-                    <th onClick={() => window.location.reload(false)}>SCHOOL NAME</th>
+                    <th>
+                    <div>SCHOOL NAME <br></br>
+                     <Button variant="outline-secondary" onClick={() => {setcurrentSchools(props.schools.sort( compareaescSchool ).slice(indexOfFirstSchool, indexOfLastSchool))}}>asc</Button>
+                      &nbsp;&nbsp;
+                    <Button variant="outline-secondary" onClick={() => {setcurrentSchools(props.schools.sort( comparedescSchool ).slice(indexOfFirstSchool, indexOfLastSchool))}}>desc</Button>
+                    </div>
+                    </th>
                     <th />
                     <th>
                         <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newSchool}/>
@@ -58,6 +94,8 @@ function SchoolList(props) {
                 )})}
             </tbody>
         </Table>
+
+        </Container>
     )
 }
 

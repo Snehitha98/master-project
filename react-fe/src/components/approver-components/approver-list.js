@@ -75,9 +75,9 @@ function ApproverList(props) {
         <tr>
           <th>
             <div>APPROVER NAME <br></br>
-            <Button variant="outline-secondary" onClick={() => {setcurrentApprovers(props.approvers.sort( comparedescApprover ).slice(indexOfFirstApprover, indexOfLastApprover))}}>desc</Button>
-              &nbsp;&nbsp;
             <Button variant="outline-secondary" onClick={() => {setcurrentApprovers(props.approvers.sort( compareaescApprover ).slice(indexOfFirstApprover, indexOfLastApprover))}}>asc</Button>
+              &nbsp;&nbsp;
+            <Button variant="outline-secondary" onClick={() => {setcurrentApprovers(props.approvers.sort( comparedescApprover ).slice(indexOfFirstApprover, indexOfLastApprover))}}>desc</Button>
             </div>
             </th>
           <th/>
