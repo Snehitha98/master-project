@@ -7,6 +7,15 @@ import '../../App.css';
 
 function MajorList(props) {
 
+    const [currentPage, setCurrentPage] = useState();
+    const [majorsPerPage] = useState();
+
+    // Get current Majors
+    const indexOfLastMajor = currentPage * majorsPerPage;
+    const indexOfFirstMajor = indexOfLastMajor - majorsPerPage;
+
+    const [currentMajors,setcurrentMajors] = useState(props.majors);
+
     const majorClicked = major => evt => {
         props.majorClicked(major);
     }
@@ -29,12 +38,38 @@ function MajorList(props) {
         props.newMajor();
     }
 
+    function compareaescMajor( a, b ) {
+    if ( a.major_name < b.major_name ){
+      return -1;
+    }
+    if ( a.major_name > b.major_name ){
+      return 1;
+    }
+    return 0;
+  }
+
+  function comparedescMajor( a, b ) {
+    if ( a.major_name < b.major_name ){
+      return 1;
+    }
+    if ( a.major_name > b.major_name ){
+      return -1;
+    }
+    return 0;
+  }
+
     return (
         <Container>
         <Table striped bordered hover>
         <thead>
             <tr>
-            <th onClick={() => window.location.reload(false)}>MAJOR NAME</th>
+            <th>
+                <div>MAJOR NAME <br></br>
+                    <Button variant="outline-secondary" onClick={() => {setcurrentMajors(props.majors.sort( compareaescMajor ).slice(indexOfFirstMajor, indexOfLastMajor))}}>asc</Button>
+                    &nbsp;&nbsp;
+                    <Button variant="outline-secondary" onClick={() => {setcurrentMajors(props.majors.sort( comparedescMajor ).slice(indexOfFirstMajor, indexOfLastMajor))}}>desc</Button>
+                </div>
+            </th>
             <th />
             <th>
                 <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newMajor}/>
