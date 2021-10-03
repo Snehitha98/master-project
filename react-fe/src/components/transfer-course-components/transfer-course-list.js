@@ -79,6 +79,87 @@ function TransferCourseList(props) {
         props.newTransferCourse();
     }
 
+    function compareCourseTitle( a, b ) {
+        if ( a.title < b.title ){
+          return -1;
+        }
+        if ( a.title > b.title ){
+          return 1;
+        }
+        return 0;
+      }
+      function comparedescCourseTitle( a, b ) {
+        if ( a.title < b.title ){
+          return 1;
+        }
+        if ( a.title > b.title ){
+          return -1;
+        }
+        return 0;
+      }
+
+    function compareSchool( a, b ) {
+        if ( a.school < b.school ){
+            return -1;
+        }
+        if ( a.school > b.school ){
+            return 1;
+        }
+        return 0;
+     }
+
+     function comparedescSchool( a, b ) {
+        if ( a.school < b.school ){
+            return 1;
+        }
+        if ( a.school > b.school ){
+            return -1;
+        }
+        return 0;
+        }
+
+
+    function compareSubjectNumber( a, b ) {
+        if ( a.subject_number < b.subject_number ){
+            return -1;
+        }
+        if ( a.subject_number > b.subject_number ){
+            return 1;
+        }
+        return 0;
+     }
+
+     function comparedescSubjectNumber( a, b ) {
+        if ( a.subject_number < b.subject_number ){
+            return 1;
+        }
+        if ( a.subject_number > b.subject_number ){
+            return -1;
+        }
+        return 0;
+     }
+
+     function sortFunc(compareby) {
+         if (compareby === 'coursetitle') {
+             setcurrentCourses(props.courses.sort(compareCourseTitle).slice(indexOfFirstCourse, indexOfLastCourse));
+         }
+         if (compareby === 'desccoursetitle') {
+             setcurrentCourses(props.courses.sort(comparedescCourseTitle).slice(indexOfFirstCourse, indexOfLastCourse));
+         }
+         if (compareby === 'school') {
+             setcurrentCourses(props.courses.sort(compareSchool).slice(indexOfFirstCourse, indexOfLastCourse));
+         }
+         if (compareby === 'descschool') {
+             setcurrentCourses(props.courses.sort(comparedescSchool).slice(indexOfFirstCourse, indexOfLastCourse));
+         }
+         if (compareby === 'subjectnumber') {
+             setcurrentCourses(props.courses.sort(compareSubjectNumber).slice(indexOfFirstCourse, indexOfLastCourse));
+         }
+         if (compareby === 'descsubjectnumber') {
+             setcurrentCourses(props.courses.sort(comparedescSubjectNumber).slice(indexOfFirstCourse, indexOfLastCourse));
+         }
+     }
+
 
     return (
         <Container>
@@ -92,9 +173,24 @@ function TransferCourseList(props) {
         <Table striped bordered hover>
             <thead>
                 <tr>
-                    <th onClick={() => window.location.reload(false)}>TRANSFER COURSE NAME</th>
-                    <th>SCHOOL NAME</th>
-                    <th>SUBJECT NUMBER</th>
+                    <th>
+                     <div>TRANSFER COURSE NAME<br></br>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('coursetitle')}>asc</Button>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('desccoursetitle')}>desc</Button>
+                        </div>
+                    </th>
+                    <th>
+                        <div>SCHOOL NAME<br></br>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('school')}>asc</Button>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('descschool')}>desc</Button>
+                    </div>
+                    </th>
+                    <th>
+                        <div>SUBJECT NUMBER<br></br>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('subjectnumber')}>asc</Button>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('descsubjectnumber')}>desc</Button>
+                        </div>
+                    </th>
                     <th/>
                     <th>
                         <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newTransferCourse}/>

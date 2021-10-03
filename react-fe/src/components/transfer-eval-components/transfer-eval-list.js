@@ -108,6 +108,248 @@ function TransferEvaluationList(props) {
         props.newTransferEval();
     }
 
+    function compareMajorName( a, b ) {
+        if ( a.major < b.major ){
+          return -1;
+        }
+        if ( a.major > b.major ){
+          return 1;
+        }
+        return 0;
+      }
+
+      function comparedescMajorName( a, b ) {
+        if ( a.major < b.major ){
+          return 1;
+        }
+        if ( a.major > b.major ){
+          return -1;
+        }
+        return 0;
+      }
+
+      function compareSchool( a, b ) {
+        if ( a.school < b.school ){
+          return -1;
+        }
+        if ( a.school > b.school ){
+          return 1;
+        }
+        return 0;
+      }
+
+      function comparedescSchool( a, b ) {
+        if ( a.school < b.school ){
+          return 1;
+        }
+        if ( a.school > b.school ){
+          return -1;
+        }
+        return 0;
+      }
+
+      function compareCourseNumber( a, b ) {
+        if ( a.course_number < b.course_number ){
+          return -1;
+        }
+        if ( a.course_number > b.course_number ){
+          return 1;
+        }
+        return 0;
+      }
+      function comparedescCourseNumber( a, b ) {
+        if ( a.course_number < b.course_number ){
+          return 1;
+        }
+        if ( a.course_number > b.course_number ){
+          return -1;
+        }
+        return 0;
+      }
+
+      function compareCourseTitle( a, b ) {
+        if ( a.course_title < b.course_title ){
+          return -1;
+        }
+        if ( a.course_title > b.course_title ){
+          return 1;
+        }
+        return 0;
+      }
+
+      function comparedescCourseTitle( a, b ) {
+        if ( a.course_title < b.course_title ){
+          return 1;
+        }
+        if ( a.course_title > b.course_title ){
+          return -1;
+        }
+        return 0;
+      }
+
+      function compareUnhm( a, b ) {
+        if ( a.unhm_eq < b.unhm_eq ){
+          return -1;
+        }
+        if ( a.unhm_eq > b.unhm_eq ){
+          return 1;
+        }
+        return 0;
+      }
+
+      function comparedescUnhm( a, b ) {
+        if ( a.unhm_eq < b.unhm_eq ){
+          return 1;
+        }
+        if ( a.unhm_eq > b.unhm_eq ){
+          return -1;
+        }
+        return 0;
+      }
+
+      function compareApprovedStatus( a, b ) {
+        if ( a.approved_status < b.approved_status ){
+          return -1;
+        }
+        if ( a.approved_status > b.approved_status ){
+          return 1;
+        }
+        return 0;
+      }
+
+      function comparedescApprovedStatus( a, b ) {
+        if ( a.approved_status < b.approved_status ){
+          return 1;
+        }
+        if ( a.approved_status > b.approved_status ){
+          return -1;
+        }
+        return 0;
+      }
+
+      function compareApprover( a, b ) {
+        if ( a.approver < b.approver ){
+          return -1;
+        }
+        if ( a.approver > b.approver ){
+          return 1;
+        }
+        return 0;
+      }
+
+      function comparedescApprover( a, b ) {
+        if ( a.approver < b.approver ){
+          return 1;
+        }
+        if ( a.approver > b.approver ){
+          return -1;
+        }
+        return 0;
+      }
+
+      function compareSem( a, b ) {
+        if ( a.sem_year_taken < b.sem_year_taken ){
+          return -1;
+        }
+        if ( a.sem_year_taken > b.sem_year_taken ){
+          return 1;
+        }
+        return 0;
+      }
+
+      function comparedescSem( a, b ) {
+        if ( a.sem_year_taken < b.sem_year_taken ){
+          return 1;
+        }
+        if ( a.sem_year_taken > b.sem_year_taken ){
+          return -1;
+        }
+        return 0;
+      }
+
+      function compareDate( a, b ) {
+        var a = Date.parse(a.expiration_date);
+        var b = Date.parse(b.expiration_date);
+        if ( a < b ){
+          return -1;
+        }
+        if ( a > b ){
+          return 1;
+        }
+        return 0;
+      }
+
+      function comparedescDate( a, b ) {
+        var a = Date.parse(a.expiration_date);
+        var b = Date.parse(b.expiration_date);
+        if ( a < b ){
+          return 1;
+        }
+        if ( a > b ){
+          return -1;
+        }
+        return 0;
+      }
+
+      function sortFunc(compareby) {
+        if (compareby==='majorname'){
+            setcurrentTransferEvals(props.transferEvals.sort( compareMajorName ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='descmajorname'){
+            setcurrentTransferEvals(props.transferEvals.sort( comparedescMajorName ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='school'){
+            setcurrentTransferEvals(props.transferEvals.sort( compareSchool ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='descschool'){
+            setcurrentTransferEvals(props.transferEvals.sort( comparedescSchool ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='coursenumber'){
+            setcurrentTransferEvals(props.transferEvals.sort( compareCourseNumber ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='desccoursenumber'){
+            setcurrentTransferEvals(props.transferEvals.sort( comparedescCourseNumber ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='coursetitle'){
+            setcurrentTransferEvals(props.transferEvals.sort( compareCourseTitle ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='coursedesctitle'){
+            setcurrentTransferEvals(props.transferEvals.sort( comparedescCourseTitle ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+
+        if (compareby==='unhm'){
+            setcurrentTransferEvals(props.transferEvals.sort( compareUnhm ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='descunhm'){
+            setcurrentTransferEvals(props.transferEvals.sort( comparedescUnhm ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='approvedstatus'){
+            setcurrentTransferEvals(props.transferEvals.sort( compareApprovedStatus ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='descapprovedstatus'){
+            setcurrentTransferEvals(props.transferEvals.sort( comparedescApprovedStatus ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='approver'){
+            setcurrentTransferEvals(props.transferEvals.sort( compareApprover ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='descapprover'){
+            setcurrentTransferEvals(props.transferEvals.sort( comparedescApprover ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='sem'){
+            setcurrentTransferEvals(props.transferEvals.sort( compareSem ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='descsem'){
+            setcurrentTransferEvals(props.transferEvals.sort( comparedescSem ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='date'){
+            setcurrentTransferEvals(props.transferEvals.sort( compareDate ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='descdate'){
+            setcurrentTransferEvals(props.transferEvals.sort( comparedescDate ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+    }
+
+
     return (
         <>
         <Form style={{ display: 'flex',alignItems:'center'}}>
@@ -121,15 +363,62 @@ function TransferEvaluationList(props) {
         <Table striped bordered hover>
             <thead>
                 <tr>
-                    <th>MAJOR NAME</th>
-                    <th>INSTITUTION/SCHOOL NAME</th>
-                    <th>COURSE #</th>
-                    <th>COURSE TITLE</th>
-                    <th>UNHM EQUIVALENT</th>
-                    <th>APPROVED STATUS</th>
-                    <th>APPROVER NAME</th>
-                    <th>SEM/YEAR TAKEN</th>
-                    <th>EXPIRATION DATE</th>
+                    <th>
+                        <div>MAJOR NAME <br></br>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('majorname')}>asc</Button>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('descmajorname')}>desc</Button>
+                        </div>
+                    </th>
+                    <th>
+                        <div>INSTITUTION/SCHOOL NAME<br></br>
+                    <Button variant="outline-secondary" onClick={() => sortFunc('school')}>asc</Button>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('descschool')}>desc</Button>
+                        </div>
+                    </th>
+                    <th>
+                        <div>COURSE #<br></br>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('coursenumber')}>asc</Button>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('desccoursenumber')}>desc</Button>
+
+                        </div>
+                    </th>
+                    <th>
+                        <div>COURSE TITLE<br></br>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('coursetitle')}>asc</Button>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('coursedesctitle')}>desc</Button>
+                        </div>
+                    </th>
+                    <th>
+                        <div>UNHM EQUIVALENT<br></br>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('unhm')}>asc</Button>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('descunhm')}>desc</Button>
+                        </div>
+                    </th>
+                    <th>
+                        <div>APPROVED STATUS<br></br>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('approvedstatus')}>asc</Button>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('descapprovedstatus')}>desc</Button>
+                        </div>
+
+                    </th>
+                    <th>
+                        <div>APPROVER NAME<br></br>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('approver')}>asc</Button>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('descapprover')}>desc</Button>
+                        </div>
+                    </th>
+                    <th>
+                        <div>SEM/YEAR TAKEN<br></br>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('sem')}>asc</Button>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('descsem')}>desc</Button>
+                        </div>
+                    </th>
+                    <th>
+                        <div>EXPIRATION DATE<br></br>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('date')}>asc</Button>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('descdate')}>desc</Button>
+                        </div>
+                    </th>
                     <th/>
                     <th>
                         <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newTransferEval}/>

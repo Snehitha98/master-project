@@ -87,20 +87,20 @@ function MajorRequirementList(props) {
     }
 
     function compareaescMajor( a, b ) {
-        if ( a.major_name < b.major_name ){
+        if ( a.major < b.major ){
           return -1;
         }
-        if ( a.major_name > b.major_name ){
+        if ( a.major > b.major ){
           return 1;
         }
         return 0;
     }
 
     function comparedescMajor( a, b ) {
-        if ( a.major_name < b.major_name ){
+        if ( a.major < b.major ){
           return 1;
         }
-        if ( a.major_name > b.major_name ){
+        if ( a.major > b.major ){
           return -1;
         }
         return 0;
@@ -126,6 +126,24 @@ function MajorRequirementList(props) {
         return 0;
     }
 
+    function sortFunc(compareby) {
+        if (compareby === 'majorreq') {
+            setcurrentMajorReqs(props.majorReqs.sort(compareaescMajorReq).slice(indexOfFirstMajorReq, indexOfLastMajorReq));
+        }
+        if (compareby === 'descmajorreq') {
+            setcurrentMajorReqs(props.majorReqs.sort(comparedescMajorReq).slice(indexOfFirstMajorReq, indexOfLastMajorReq));
+        }
+        if (compareby === 'major') {
+            setcurrentMajorReqs(props.majorReqs.sort(compareaescMajor).slice(indexOfFirstMajorReq, indexOfLastMajorReq));
+        }
+        if (compareby === 'descmajor') {
+            setcurrentMajorReqs(props.majorReqs.sort(comparedescMajor).slice(indexOfFirstMajorReq, indexOfLastMajorReq));
+        }
+    }
+
+
+
+
     return (
         <Container>
             <Form style={{ display: 'flex',alignItems:'center'}}>
@@ -140,16 +158,14 @@ function MajorRequirementList(props) {
                 <tr>
                     <th>
                     <div>MAJOR REQUIREMENT<br></br>
-                    <Button variant="outline-secondary" onClick={() => {setcurrentMajorReqs(props.majorReqs.sort( compareaescMajorReq ).slice(indexOfFirstMajorReq, indexOfLastMajorReq))}}>asc</Button>
-                      &nbsp;&nbsp;
-                    <Button variant="outline-secondary" onClick={() => {setcurrentMajorReqs(props.majorReqs.sort( comparedescMajorReq ).slice(indexOfFirstMajorReq, indexOfLastMajorReq))}}>desc</Button>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('majorreq')}>asc</Button>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('descmajorreq')}>desc</Button>
                     </div>
                     </th>
                     <th>
                     <div>MAJOR NAME<br></br>
-                    <Button variant="outline-secondary" onClick={() => {setcurrentMajorReqs(props.majorReqs.sort( compareaescMajor ).slice(indexOfFirstMajorReq, indexOfLastMajorReq))}}>asc</Button>
-                      &nbsp;&nbsp;
-                    <Button variant="outline-secondary" onClick={() => {setcurrentMajorReqs(props.majorReqs.sort( comparedescMajor ).slice(indexOfFirstMajorReq, indexOfLastMajorReq))}}>desc</Button>
+                       <Button variant="outline-secondary" onClick={() => sortFunc('major')}>asc</Button>
+                       <Button variant="outline-secondary" onClick={() => sortFunc('descmajor')}>desc</Button>
                     </div>
                     </th>
                     <th/>
