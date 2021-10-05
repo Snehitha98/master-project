@@ -10,6 +10,8 @@ django = "~=3.1.7"
 openpyxl = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+django-heroku = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.9"
