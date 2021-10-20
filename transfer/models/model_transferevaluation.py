@@ -24,7 +24,7 @@ class Transferevaluation(models.Model):
     approver_id = models.ForeignKey(Approver, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ('transfer_course_id', 'major_req_id', 'sem_year_taken')
+        unique_together = ('transfer_course_id', 'major_req_id')
 
     def __str__(self):
         return self.transfer_eval_id
