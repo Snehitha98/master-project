@@ -104,7 +104,7 @@ function ApproverList(props) {
         })}
       </tbody>
     </Table>
-      <Pagination elementsPerPage={approversPerPage} totalElements={props.approvers.length} paginate={paginate} url='approver/!#'/>
+
     </Container>
   )
 }

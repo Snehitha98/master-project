@@ -247,25 +247,6 @@ function TransferEvaluationList(props) {
         return 0;
       }
 
-      function compareSem( a, b ) {
-        if ( a.sem_year_taken < b.sem_year_taken ){
-          return -1;
-        }
-        if ( a.sem_year_taken > b.sem_year_taken ){
-          return 1;
-        }
-        return 0;
-      }
-
-      function comparedescSem( a, b ) {
-        if ( a.sem_year_taken < b.sem_year_taken ){
-          return 1;
-        }
-        if ( a.sem_year_taken > b.sem_year_taken ){
-          return -1;
-        }
-        return 0;
-      }
 
       function compareDate( a, b ) {
         var a = Date.parse(a.expiration_date);
@@ -335,12 +316,6 @@ function TransferEvaluationList(props) {
         if (compareby==='descapprover'){
             setcurrentTransferEvals(props.transferEvals.sort( comparedescApprover ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
         }
-        if (compareby==='sem'){
-            setcurrentTransferEvals(props.transferEvals.sort( compareSem ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
-        }
-        if (compareby==='descsem'){
-            setcurrentTransferEvals(props.transferEvals.sort( comparedescSem ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
-        }
         if (compareby==='date'){
             setcurrentTransferEvals(props.transferEvals.sort( compareDate ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
         }
@@ -408,12 +383,6 @@ function TransferEvaluationList(props) {
                         </div>
                     </th>
                     <th>
-                        <div>SEM/YEAR TAKEN<br></br>
-                            <Button variant="outline-secondary" onClick={() => sortFunc('sem')}>asc</Button>
-                            <Button variant="outline-secondary" onClick={() => sortFunc('descsem')}>desc</Button>
-                        </div>
-                    </th>
-                    <th>
                         <div>EXPIRATION DATE<br></br>
                             <Button variant="outline-secondary" onClick={() => sortFunc('date')}>asc</Button>
                             <Button variant="outline-secondary" onClick={() => sortFunc('descdate')}>desc</Button>
@@ -450,9 +419,7 @@ function TransferEvaluationList(props) {
                             <td onClick={transferEvalClicked(transferEval)}>
                                 {transferEval.approver}
                             </td>
-                            <td onClick={transferEvalClicked(transferEval)}>
-                                {transferEval.sem_year_taken}
-                            </td>
+
                             <td onClick={transferEvalClicked(transferEval)}>
                                 {transferEval.expiration_date}
                             </td>

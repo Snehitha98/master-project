@@ -15,6 +15,7 @@ function SchoolList(props) {
     const indexOfFirstSchool = indexOfLastSchool - schoolsPerPage;
 
     const [currentSchools,setcurrentSchools] = useState(props.schools);
+    const [currentStates, setcurrentStates] = useState(props.schools.state_name);
 
     const schoolClicked = school => evt => {
         props.schoolClicked(school);
@@ -59,6 +60,26 @@ function SchoolList(props) {
     return 0;
   }
 
+  function compareaescState( a, b ) {
+    if ( a.state_name < b.state_name ){
+      return -1;
+    }
+    if ( a.state_name > b.state_name ){
+      return 1;
+    }
+    return 0;
+  }
+
+  function comparedescState( a, b ) {
+    if ( a.state_name < b.state_name ){
+      return 1;
+    }
+    if ( a.state_name > b.state_name ){
+      return -1;
+    }
+    return 0;
+  }
+
     return (
         <Container>
         <Table striped bordered hover>
@@ -69,6 +90,13 @@ function SchoolList(props) {
                      <Button variant="outline-secondary" onClick={() => {setcurrentSchools(props.schools.sort( compareaescSchool ).slice(indexOfFirstSchool, indexOfLastSchool))}}>asc</Button>
                       &nbsp;&nbsp;
                     <Button variant="outline-secondary" onClick={() => {setcurrentSchools(props.schools.sort( comparedescSchool ).slice(indexOfFirstSchool, indexOfLastSchool))}}>desc</Button>
+                    </div>
+                    </th>
+                    <th>
+                        <div>STATE NAME<br></br>
+                     <Button variant="outline-secondary" onClick={() => {setcurrentStates(props.schools.sort( compareaescState ).slice(indexOfFirstSchool, indexOfLastSchool))}}>asc</Button>
+                      &nbsp;&nbsp;
+                    <Button variant="outline-secondary" onClick={() => {setcurrentStates(props.schools.sort( comparedescState ).slice(indexOfFirstSchool, indexOfLastSchool))}}>desc</Button>
                     </div>
                     </th>
                     <th />
@@ -83,6 +111,9 @@ function SchoolList(props) {
                     <tr value={school.school_id} key={i}>
                         <td onClick={schoolClicked(school)}>
                         {school.school_name}
+                        </td>
+                        <td>
+                            {school.state_name}
                         </td>
                         <td>
                             <Button variant="outline-primary" onClick={() => editClicked(school)}>Edit</Button>

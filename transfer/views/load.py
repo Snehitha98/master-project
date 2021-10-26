@@ -20,6 +20,7 @@ def import_data(request):
     wb = load_workbook(filename=request, data_only=True)
     majors = import_major(wb)
     schools = []
+    states = []
     courses = []
     approvers = []
     major_reqs = []
@@ -31,7 +32,7 @@ def import_data(request):
     approvers.extend(data[2])
     major_reqs.extend(data[3])
     evals.extend(data[4])
-    import_school(schools)
+    # import_school(schools)
     import_course(courses)
     import_approvers(approvers)
     import_requirement(major_reqs)
@@ -51,17 +52,18 @@ def import_major(wb_object):
     return major_names
 
 
-def import_school(schools):
+def import_school(states):
     """
     Goes through the Schools and adds them into the database
     """
     unique_schools = []
     count = 1
-    for school in schools:
-        if school not in unique_schools:
-            unique_schools.append(school)
-    for school_name in unique_schools:
-        school_data = School(count, school_name, "N/A")
+    # for school in schools:
+    #     if school not in unique_schools:
+    #         unique_schools.append(school)
+
+    for state in states:
+        school_data = School(count, state[2], state[1])
         school_data.save()
         count = count + 1
 
@@ -115,11 +117,10 @@ def import_evaluations(evals):
             count,
             evaluation[0],  # course_id
             evaluation[1],  # major-req_id
-            evaluation[2],  # eval_row[2] sem_year_taken
-            evaluation[5],
-            evaluation[3],  # approved_status
-            evaluation[6],  # comment
-            evaluation[4]  # approver_id
+            evaluation[4],  # expiration_date
+            evaluation[2],  # approved_status
+            evaluation[5],  # comment
+            evaluation[3]  # approver_id
         )
         eval_data.save()
         count = count + 1
@@ -211,33 +212,34 @@ def eval_with_fk(major_id, eval_row, schools, courses, approvers, major_reqs):
     eval_data = []
     # get school name from column 1
     # find school ID in schools list
-    school_name = eval_row[0]
+    state_name = eval_row[0]
+    school_name = eval_row[1]
     school_id = schools.index(school_name) + 1
 
     # get subject number and course title from columns 2 and 3
     # find course ID in courses list
     course_data = []
     course_data.append(school_id)
-    course_data.extend(eval_row[1:3])
+    course_data.extend(eval_row[2:4])
     course_id = courses.index(course_data) + 1
     eval_data.append(course_id)
     major_req_desc = eval_row[5]
     major_req_id = major_reqs.index([major_id, major_req_desc]) + 1
     eval_data.append(major_req_id)
 
-    # Get sem & year taken and approved status from columns 4 and 5
-    eval_data.extend(eval_row[3:5])
+    # Get approved status
+    eval_data.append(eval_row[4])
 
     # get approver name from column 8 and find approver ID in approvers list
-    approver_name = eval_row[7]
+    approver_name = eval_row[8]
     approver_id = approvers.index(approver_name) + 1
     eval_data.append(approver_id)
 
     # get expiration date from column 9
-    eval_data.append(eval_row[8])
+    eval_data.append(eval_row[7])
 
     # get comment from column 12
-    eval_data.append(eval_row[11])
+    eval_data.append(eval_row[10])
     return eval_data
 
 
@@ -305,6 +307,27 @@ def get_eval_by_major(
     return evals
 
 
+def course_with_pk(row, schools):
+    """
+    """
+    school_data = []
+    school_name = row[1]
+    school_id = schools.index(school_name) + 1
+    school_data.append(school_id)
+    school_data.extend(row[0:2])
+    return school_data
+
+
+def get_state_school_by_major(transfer_wb, start_col, end_col, schools):
+    school_state = []
+    for sheet in transfer_wb:
+        for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=start_col, max_col=end_col,
+                                   values_only=True):
+            school_data = course_with_pk(row, schools)
+            school_state.append(school_data)
+    return school_state
+
+
 def get_data_by_major(
         transfer_wb, schools, courses, approvers, major_reqs, evals):
     """
@@ -327,18 +350,28 @@ def get_data_by_major(
         nothing. We use pass by reference mutable objects to update the
         parameters
     """
-    school_col_idx = 1  # columh 'A'
+    school_col_idx = 2  # column 'A'
     school_lst = get_unique_vals_from_col(transfer_wb, school_col_idx)
     schools.extend(school_lst)
 
+    states = []
     start_col = 1
-    end_col = 3
+    end_col = 2
+    school_state_lst = get_state_school_by_major(transfer_wb, start_col, end_col, schools)
+    for school_state in school_state_lst:
+        if school_state not in states:
+            states.append(school_state)
+    print(states)
+    import_school(states)
+
+    start_col = 2
+    end_col = 4
     course_lst = get_course_by_major(transfer_wb, start_col, end_col, schools)
     for course in course_lst:
         if course not in courses:
             courses.append(course)
 
-    approver_col_idx = 8  # column 'H'
+    approver_col_idx = 9  # column 'H'
     approver_lst = get_unique_vals_from_col(transfer_wb, approver_col_idx)
     approvers.extend(approver_lst)
 
