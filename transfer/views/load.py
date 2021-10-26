@@ -361,8 +361,11 @@ def get_data_by_major(
     for school_state in school_state_lst:
         if school_state not in states:
             states.append(school_state)
-    print(states)
     import_school(states)
+
+    schools = []
+    for school in states:
+        schools.append(school[2])
 
     start_col = 2
     end_col = 4

@@ -9,7 +9,7 @@ import { TCAPI } from '../../api-services/transfer-course-service';
 function TransferCourseList(props) {
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [coursesPerPage] = useState(5);
+    const [coursesPerPage] = useState(8);
 
     // Get current transfer evals
     const indexOfLastCourse = currentPage * coursesPerPage;

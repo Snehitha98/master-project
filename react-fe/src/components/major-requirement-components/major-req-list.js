@@ -9,7 +9,7 @@ import { MRAPI } from '../../api-services/major-req-service';
 function MajorRequirementList(props) {
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [majorReqsPerPage] = useState(5);
+    const [majorReqsPerPage] = useState(8);
 
     // Get current transfer evals
     const indexOfLastMajorReq = currentPage * majorReqsPerPage;

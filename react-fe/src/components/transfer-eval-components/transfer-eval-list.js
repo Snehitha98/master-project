@@ -9,7 +9,7 @@ import { API } from '../../api-services/transfer-eval-service';
 function TransferEvaluationList(props) {
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [transferEvalsPerPage] = useState(5);
+    const [transferEvalsPerPage] = useState(8);
 
     // Get current transfer evals
     const indexOfLastTransferEval = currentPage * transferEvalsPerPage;
