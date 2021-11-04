@@ -62,7 +62,7 @@ function School() {
           <br/>
             <header className="App-header">
               <div style={{ display: 'flex',alignItems:'center' }}>
-                <h3>Schools</h3>
+                <h3>Institutions</h3>
               </div>
             </header>
             <div className="layout">

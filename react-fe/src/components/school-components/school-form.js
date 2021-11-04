@@ -30,7 +30,7 @@ function SchoolForm(props) {
             { props.school ? (
                 <div>
                     <Form id='form-css'>
-                        <Form.Label htmlFor="name">School name</Form.Label>
+                        <Form.Label htmlFor="name">Institution name</Form.Label>
                         <Form.Control id="name" type="text" placeholder="Enter name"
                             value={schoolName} onChange={evt => setSchoolName(evt.target.value)}/>
                         <Form.Label htmlFor="school">State name</Form.Label>

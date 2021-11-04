@@ -63,7 +63,7 @@ function MajorRequirememnt() {
           <br/>
             <header className="App-header">
               <div style={{ display: 'flex',alignItems:'center' }}>
-                <h3>Major requirements</h3>
+                <h3>UNHM Courses</h3>
               </div>
             </header>
             <div className="layout">

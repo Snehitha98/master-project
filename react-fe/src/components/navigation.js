@@ -12,9 +12,9 @@ const Navigation = () => {
         <Nav.Link href="/">Home</Nav.Link>
         <Nav.Link href="/approver">Approver</Nav.Link>
         <Nav.Link href="/major">Major</Nav.Link>
-        <Nav.Link href="/school">School</Nav.Link>
+        <Nav.Link href="/school">Institution</Nav.Link>
         <Nav.Link href="/transfer-course">Transfer Course</Nav.Link>
-        <Nav.Link href="/major-req">Major Requirement</Nav.Link>
+        <Nav.Link href="/major-req">UNHM Course</Nav.Link>
       </Nav>
         <Form inline>
           <Button href="/import"  size="sm" variant="dark" className="mr-sm-2">Import</Button>

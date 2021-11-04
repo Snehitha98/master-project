@@ -157,15 +157,15 @@ function MajorRequirementList(props) {
             <thead>
                 <tr>
                     <th>
-                    <div>MAJOR REQUIREMENT<br></br>
-                        <Button variant="outline-secondary" onClick={() => sortFunc('majorreq')}>asc</Button>
-                        <Button variant="outline-secondary" onClick={() => sortFunc('descmajorreq')}>desc</Button>
-                    </div>
-                    </th>
-                    <th>
                     <div>MAJOR NAME<br></br>
                        <Button variant="outline-secondary" onClick={() => sortFunc('major')}>asc</Button>
                        <Button variant="outline-secondary" onClick={() => sortFunc('descmajor')}>desc</Button>
+                    </div>
+                    </th>
+                    <th>
+                    <div>UNHM COURSE #<br></br>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('majorreq')}>asc</Button>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('descmajorreq')}>desc</Button>
                     </div>
                     </th>
                     <th/>
@@ -178,11 +178,12 @@ function MajorRequirementList(props) {
                     { currentMajorReqs && currentMajorReqs.map( majorReq => {
                     return (
                         <tr>
+
+                            <td onClick={majorReqClicked(majorReq)}>
+                                {majorReq.major}
+                            </td>
                             <td onClick={majorReqClicked(majorReq)}>
                                 {majorReq.description}
-                            </td>
-                            <td>
-                                {majorReq.major}
                             </td>
                             <td>
                                 <Button variant="outline-primary" onClick={() => editClicked(majorReq)}>Edit</Button>

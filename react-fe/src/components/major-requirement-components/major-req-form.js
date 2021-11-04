@@ -42,7 +42,7 @@ function MajorRequirementForm(props) {
             { props.majorReq ? (
                 <div>
                     <Form id='form-css'>
-                        <Form.Label htmlFor="name">Major req name</Form.Label>
+                        <Form.Label htmlFor="name">UNHM Course #</Form.Label>
                         <Form.Control id="name" type="text" placeholder="Enter name"
                             value={description} onChange={evt => setDescription(evt.target.value)}/>
                         <Form.Label htmlFor="school">Major name</Form.Label>

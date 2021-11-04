@@ -45,10 +45,10 @@ function TransferCourseForm(props) {
             { props.course ? (
                 <div>
                     <Form id='form-css'>
-                        <Form.Label htmlFor="name">Transfer course name</Form.Label>
+                        <Form.Label htmlFor="name">Course Title</Form.Label>
                         <Form.Control id="name" type="text" placeholder="Enter name"
                             value={title} onChange={evt => setTitle(evt.target.value)}/>
-                        <Form.Label htmlFor="school">School name</Form.Label>
+                        <Form.Label htmlFor="school">Institution name</Form.Label>
                             <select id='school'
                                     className='form-control'
                                     value={school_id}
@@ -61,7 +61,7 @@ function TransferCourseForm(props) {
                                 })}
                             </select>
                             {console.log(school_id)}
-                        <Form.Label htmlFor="subjectnumber">Subject number</Form.Label>
+                        <Form.Label htmlFor="subjectnumber">Course #</Form.Label>
                         <Form.Control id="subjectnumber" type="text" placeholder="Enter subject number"
                             value={subjectNumber} onChange={evt => setSubjectNumber(evt.target.value)}/><br/>
 

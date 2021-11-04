@@ -46,11 +46,11 @@ function TransferCourseList(props) {
       }
       return(
           <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Label>School Name</Form.Label>
+          <Form.Label>Institution Name</Form.Label>
               <Form.Control as="select" size="sm" custom
                 value={selectedSchoolName}
                 onChange={evt => setselectedSchoolName(evt.target.value)}>
-                  <option>----Select School Name----</option>
+                  <option>----Select Institution Name----</option>
                   <SchoolOptions/>
               </Form.Control>
         </Form.Group>
@@ -174,19 +174,20 @@ function TransferCourseList(props) {
             <thead>
                 <tr>
                     <th>
-                     <div>TRANSFER COURSE NAME<br></br>
-                        <Button variant="outline-secondary" onClick={() => sortFunc('coursetitle')}>asc</Button>
-                        <Button variant="outline-secondary" onClick={() => sortFunc('desccoursetitle')}>desc</Button>
-                        </div>
-                    </th>
-                    <th>
-                        <div>SCHOOL NAME<br></br>
+                        <div>INSTITUTION NAME<br></br>
                         <Button variant="outline-secondary" onClick={() => sortFunc('school')}>asc</Button>
                         <Button variant="outline-secondary" onClick={() => sortFunc('descschool')}>desc</Button>
                     </div>
                     </th>
                     <th>
-                        <div>SUBJECT NUMBER<br></br>
+                     <div>COURSE TITLE<br></br>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('coursetitle')}>asc</Button>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('desccoursetitle')}>desc</Button>
+                        </div>
+                    </th>
+
+                    <th>
+                        <div>COURSE #<br></br>
                         <Button variant="outline-secondary" onClick={() => sortFunc('subjectnumber')}>asc</Button>
                         <Button variant="outline-secondary" onClick={() => sortFunc('descsubjectnumber')}>desc</Button>
                         </div>
@@ -202,12 +203,12 @@ function TransferCourseList(props) {
                     return (
                         <tr>
                             <td onClick={courseClicked(course)}>
-                            {course.title}
-                            </td>
-                            <td>
                                 {course.school}
                             </td>
-                            <td>
+                            <td onClick={courseClicked(course)}>
+                            {course.title}
+                            </td>
+                            <td onClick={courseClicked(course)}>
                                 {course.subject_number}
                             </td>
                             <td>

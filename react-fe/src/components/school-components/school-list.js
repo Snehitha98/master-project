@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Table} from 'react-bootstrap';
+import {Col, Container, Form, Table} from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { API } from '../../api-services/school-services';
+import Pagination from '../../components/pagination';
 
 function SchoolList(props) {
 
@@ -15,7 +16,6 @@ function SchoolList(props) {
     const indexOfFirstSchool = indexOfLastSchool - schoolsPerPage;
 
     const [currentSchools,setcurrentSchools] = useState(props.schools);
-    const [currentStates, setcurrentStates] = useState(props.schools.state_name);
 
     const schoolClicked = school => evt => {
         props.schoolClicked(school);
@@ -85,18 +85,19 @@ function SchoolList(props) {
         <Table striped bordered hover>
             <thead>
                 <tr>
+
                     <th>
-                    <div>SCHOOL NAME <br></br>
-                     <Button variant="outline-secondary" onClick={() => {setcurrentSchools(props.schools.sort( compareaescSchool ).slice(indexOfFirstSchool, indexOfLastSchool))}}>asc</Button>
+                        <div>STATE NAME<br></br>
+                     <Button variant="outline-secondary" onClick={() => {setcurrentSchools(props.schools.sort( compareaescState ).slice(indexOfFirstSchool, indexOfLastSchool))}}>asc</Button>
                       &nbsp;&nbsp;
-                    <Button variant="outline-secondary" onClick={() => {setcurrentSchools(props.schools.sort( comparedescSchool ).slice(indexOfFirstSchool, indexOfLastSchool))}}>desc</Button>
+                    <Button variant="outline-secondary" onClick={() => {setcurrentSchools(props.schools.sort( comparedescState ).slice(indexOfFirstSchool, indexOfLastSchool))}}>desc</Button>
                     </div>
                     </th>
                     <th>
-                        <div>STATE NAME<br></br>
-                     <Button variant="outline-secondary" onClick={() => {setcurrentStates(props.schools.sort( compareaescState ).slice(indexOfFirstSchool, indexOfLastSchool))}}>asc</Button>
+                    <div>INSTITUTION NAME <br></br>
+                     <Button variant="outline-secondary" onClick={() => {setcurrentSchools(props.schools.sort( compareaescSchool ).slice(indexOfFirstSchool, indexOfLastSchool))}}>asc</Button>
                       &nbsp;&nbsp;
-                    <Button variant="outline-secondary" onClick={() => {setcurrentStates(props.schools.sort( comparedescState ).slice(indexOfFirstSchool, indexOfLastSchool))}}>desc</Button>
+                    <Button variant="outline-secondary" onClick={() => {setcurrentSchools(props.schools.sort( comparedescSchool ).slice(indexOfFirstSchool, indexOfLastSchool))}}>desc</Button>
                     </div>
                     </th>
                     <th />
@@ -109,11 +110,12 @@ function SchoolList(props) {
                 { props.schools && props.schools.map( (school,i) => {
                 return (
                     <tr value={school.school_id} key={i}>
+
+                        <td onClick={schoolClicked(school)}>
+                            {school.state_name}
+                        </td>
                         <td onClick={schoolClicked(school)}>
                         {school.school_name}
-                        </td>
-                        <td>
-                            {school.state_name}
                         </td>
                         <td>
                             <Button variant="outline-primary" onClick={() => editClicked(school)}>Edit</Button>
@@ -125,7 +127,6 @@ function SchoolList(props) {
                 )})}
             </tbody>
         </Table>
-
         </Container>
     )
 }

@@ -71,11 +71,11 @@ function TransferEvaluationList(props) {
       }
       return(
           <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Label>School Name</Form.Label>
+          <Form.Label>Institution Name</Form.Label>
               <Form.Control as="select" size="sm" custom
                 value={selectedSchoolName}
                 onChange={evt => setselectedSchoolName(evt.target.value)}>
-                  <option>----Select School Name----</option>
+                  <option>----Select Institution Name----</option>
                   <SchoolOptions/>
               </Form.Control>
         </Form.Group>
@@ -345,7 +345,7 @@ function TransferEvaluationList(props) {
                         </div>
                     </th>
                     <th>
-                        <div>INSTITUTION/SCHOOL NAME<br></br>
+                        <div>INSTITUTION NAME<br></br>
                     <Button variant="outline-secondary" onClick={() => sortFunc('school')}>asc</Button>
                             <Button variant="outline-secondary" onClick={() => sortFunc('descschool')}>desc</Button>
                         </div>
@@ -364,7 +364,7 @@ function TransferEvaluationList(props) {
                         </div>
                     </th>
                     <th>
-                        <div>UNHM EQUIVALENT<br></br>
+                        <div>UNHM COURSE #<br></br>
                             <Button variant="outline-secondary" onClick={() => sortFunc('unhm')}>asc</Button>
                             <Button variant="outline-secondary" onClick={() => sortFunc('descunhm')}>desc</Button>
                         </div>

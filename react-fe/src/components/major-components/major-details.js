@@ -5,9 +5,11 @@ function MajorDetails(props) {
     return (
         <div>
             {props.major ? (
-                <div className='major-detail'>
-                    <h4>Major ID: {props.major.major_id}</h4>
-                    <h4>Major name: {props.major.major_name}</h4>
+
+                <div>
+                    <h5><i>Major details</i></h5><br/>
+                    <em>&nbsp;Major ID: {props.major.major_id}</em><br/>
+                    <em>&nbsp;Major name: {props.major.major_name}</em>
                 </div>
             ) : null}
         </div>
