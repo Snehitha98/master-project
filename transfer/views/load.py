@@ -31,6 +31,7 @@ def import_data(request):
     courses.extend(data[1])
     approvers.extend(data[2])
     major_reqs.extend(data[3])
+    print(major_reqs)
     evals.extend(data[4])
     # import_school(schools)
     import_course(courses)
@@ -101,10 +102,13 @@ def import_requirement(major_reqs):
     Goes through the requirements and adds them into the database
     """
     count = 1
+    major_req_list = []
+    print(major_reqs)
     for req in major_reqs:
-        req_data = MajorRequirement(count, req[1], req[0])
-        req_data.save()
-        count = count + 1
+        if req not in major_req_list:
+            req_data = MajorRequirement(count, req[1], req[2], req[0])
+            req_data.save()
+            count = count + 1
 
 
 def import_evaluations(evals):
@@ -167,7 +171,7 @@ def get_unique_vals_from_col(transfer_wb, col_idx):
     return list(value_set)
 
 
-def get_unique_reqs_vals_from_col(transfer_wb, col_idx):
+def get_unique_reqs_vals_from_col(transfer_wb, start_col, end_col):
     """
     Computes and returns a list of unique values from the cell values of the
     column at col_idx in the worksheet major_ws.
@@ -180,21 +184,26 @@ def get_unique_reqs_vals_from_col(transfer_wb, col_idx):
     # Accumulator is a set because it let us add ONLY unique values
     # value_set = set()
     major_descriptions = []
+    major_req = []
     # Iterate over all the rows in the selected column, col_idx
     # Loop variable is a tuple with one element, call value
     for major_ws in transfer_wb:
         major_id = transfer_wb.sheetnames.index(major_ws.title) + 1
-        value_set = set()
-        for row_tuple in major_ws.iter_rows(
+        for row in major_ws.iter_rows(
                 min_row=2, max_row=major_ws.max_row,
-                min_col=col_idx, max_col=col_idx,
+                min_col=start_col, max_col=end_col,
                 values_only=True):
-            # Extract element value from the tuple and add it to value_set
-            # If element value already exists in value_set, nothing happe
-            value_set.add(row_tuple[0])
-        for major_description in list(value_set):
-            major_descriptions.append([major_id, major_description])
-    return major_descriptions
+            major_req.append(major_req_with_fk(row, major_id))
+    return major_req
+
+
+def major_req_with_fk(row, major_id):
+    """
+    """
+    major_req_data = []
+    major_req_data.append(major_id)
+    major_req_data.extend(row[1:3])
+    return major_req_data
 
 
 def eval_with_fk(major_id, eval_row, schools, courses, approvers, major_reqs):
@@ -212,7 +221,6 @@ def eval_with_fk(major_id, eval_row, schools, courses, approvers, major_reqs):
     eval_data = []
     # get school name from column 1
     # find school ID in schools list
-    state_name = eval_row[0]
     school_name = eval_row[1]
     school_id = schools.index(school_name) + 1
 
@@ -223,8 +231,11 @@ def eval_with_fk(major_id, eval_row, schools, courses, approvers, major_reqs):
     course_data.extend(eval_row[2:4])
     course_id = courses.index(course_data) + 1
     eval_data.append(course_id)
-    major_req_desc = eval_row[5]
-    major_req_id = major_reqs.index([major_id, major_req_desc]) + 1
+
+    major_req_data = []
+    major_req_data.append(major_id)
+    major_req_data.extend(eval_row[5:7])
+    major_req_id = major_reqs.index(major_req_data) + 1
     eval_data.append(major_req_id)
 
     # Get approved status
@@ -378,10 +389,12 @@ def get_data_by_major(
     approver_lst = get_unique_vals_from_col(transfer_wb, approver_col_idx)
     approvers.extend(approver_lst)
 
-    major_req_col_idx = 6  # column 'F'
-    major_descriptions = get_unique_reqs_vals_from_col(transfer_wb, major_req_col_idx)
+    start_col = 5
+    end_col = 7
+    major_descriptions = get_unique_reqs_vals_from_col(transfer_wb, start_col, end_col)
     for description in major_descriptions:
-        major_reqs.append(description)
+        if description not in major_reqs:
+            major_reqs.append(description)
 
     start_col = 1
     end_col = 12

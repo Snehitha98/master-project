@@ -126,6 +126,26 @@ function MajorRequirementList(props) {
         return 0;
     }
 
+    function compareaescMajorReqTitle( a, b ) {
+        if ( a.major_req_title< b.major_req_title ){
+          return -1;
+        }
+        if ( a.major_req_title > b.major_req_title ){
+          return 1;
+        }
+        return 0;
+    }
+
+  function comparedescMajorReqTitle( a, b ) {
+        if ( a.major_req_title < b.major_req_title ){
+          return 1;
+        }
+        if ( a.major_req_title > b.major_req_title ){
+          return -1;
+        }
+        return 0;
+    }
+
     function sortFunc(compareby) {
         if (compareby === 'majorreq') {
             setcurrentMajorReqs(props.majorReqs.sort(compareaescMajorReq).slice(indexOfFirstMajorReq, indexOfLastMajorReq));
@@ -133,12 +153,19 @@ function MajorRequirementList(props) {
         if (compareby === 'descmajorreq') {
             setcurrentMajorReqs(props.majorReqs.sort(comparedescMajorReq).slice(indexOfFirstMajorReq, indexOfLastMajorReq));
         }
+        if (compareby === 'majorreqtitle') {
+            setcurrentMajorReqs(props.majorReqs.sort(compareaescMajorReqTitle).slice(indexOfFirstMajorReq, indexOfLastMajorReq));
+        }
+        if (compareby === 'descmajorreqtitle') {
+            setcurrentMajorReqs(props.majorReqs.sort(comparedescMajorReqTitle).slice(indexOfFirstMajorReq, indexOfLastMajorReq));
+        }
         if (compareby === 'major') {
             setcurrentMajorReqs(props.majorReqs.sort(compareaescMajor).slice(indexOfFirstMajorReq, indexOfLastMajorReq));
         }
         if (compareby === 'descmajor') {
             setcurrentMajorReqs(props.majorReqs.sort(comparedescMajor).slice(indexOfFirstMajorReq, indexOfLastMajorReq));
         }
+
     }
 
 
@@ -163,12 +190,18 @@ function MajorRequirementList(props) {
                     </div>
                     </th>
                     <th>
+                    <div>UNHM COURSE TITLE<br></br>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('majorreqtitle')}>asc</Button>
+                        <Button variant="outline-secondary" onClick={() => sortFunc('descmajorreqtitle')}>desc</Button>
+                    </div>
+                    </th>
+                    <th>
                     <div>UNHM COURSE #<br></br>
                         <Button variant="outline-secondary" onClick={() => sortFunc('majorreq')}>asc</Button>
                         <Button variant="outline-secondary" onClick={() => sortFunc('descmajorreq')}>desc</Button>
                     </div>
                     </th>
-                    <th/>
+
                     <th>
                         <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newMajorReq}/>
                     </th>
@@ -181,6 +214,9 @@ function MajorRequirementList(props) {
 
                             <td onClick={majorReqClicked(majorReq)}>
                                 {majorReq.major}
+                            </td>
+                            <td onClick={majorReqClicked(majorReq)}>
+                                {majorReq.major_req_title}
                             </td>
                             <td onClick={majorReqClicked(majorReq)}>
                                 {majorReq.description}

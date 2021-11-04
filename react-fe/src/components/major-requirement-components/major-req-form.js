@@ -8,20 +8,22 @@ function MajorRequirementForm(props) {
     const [major_id, setMajorId] = useState('');
     const [majors, setMajors] = useState('');
     const [description, setDescription] = useState('');
+    const [major_req_title, setMajorReqTitle] = useState('');
 
     useEffect(() => {
         setDescription(props.majorReq.description);
+        setMajorReqTitle(props.majorReq.major_req_title);
         setMajorId(props.majorReq.major_id);
     }, [props.majorReq])
 
     const updateClicked = () => {
-        MRAPI.updateMajorReq(props.majorReq.major_req_id, {description: description, major_id: major_id})
+        MRAPI.updateMajorReq(props.majorReq.major_req_id, {description: description, major_req_title: major_req_title, major_id: major_id})
             .then(resp => {
                  props.updateMajorReq(resp) });
     };
 
     const createClicked = () => {
-        MRAPI.createMajorReq({description: description, major_id: major_id})
+        MRAPI.createMajorReq({description: description, major_req_title: major_req_title, major_id: major_id})
             .then(resp => props.majorReqCreated(resp));
     };
 
@@ -55,7 +57,10 @@ function MajorRequirementForm(props) {
                                         <option key={major.major_id} value={major.major_id}>{major.major_name}</option>
                                     )
                                 })}
-                            </select><br />
+                            </select>
+                            <Form.Label htmlFor="majorreqtitle">Course Title</Form.Label>
+                        <Form.Control id="majorreqtitle" type="text" placeholder="Enter course title"
+                            value={major_req_title} onChange={evt => setMajorReqTitle(evt.target.value)}/><br/>
 
                         { props.majorReq.major_req_id ?
                             <Button variant="outline-success" type="submit" onClick={updateClicked}>

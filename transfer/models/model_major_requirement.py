@@ -13,10 +13,11 @@ class MajorRequirement(models.Model):
     """
     major_req_id = models.AutoField(primary_key=True)
     description = models.CharField(max_length=200, default=None)
+    major_req_title = models.CharField(max_length=200, blank=True, null=True)
     major_id = models.ForeignKey(Major, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ('major_id', 'description')
+        unique_together = ('major_id', 'description', 'major_req_title')
 
     def __str__(self):
         return str(self.description)

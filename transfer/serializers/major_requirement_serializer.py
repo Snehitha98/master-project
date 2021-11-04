@@ -16,4 +16,4 @@ class majorRequirementSerializer(serializers.ModelSerializer):
         Define the fields that gets serialized
         """
         model = MajorRequirement
-        fields = ['major_req_id', 'description', 'major_id', 'major']
+        fields = ['major_req_id', 'description', 'major_req_title', 'major_id', 'major']

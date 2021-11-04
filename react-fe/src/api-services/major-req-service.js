@@ -4,6 +4,7 @@ export class MRAPI {
 
         const formData = new FormData();
         formData.append('description', body.description);
+        formData.append('major_req_title', body.major_req_title);
         formData.append('major_id', body.major_id);
 
         return fetch(`http://127.0.0.1:8000/major-requirement/${major_req_id}/`, {
@@ -16,6 +17,7 @@ export class MRAPI {
     static createMajorReq(body) {
         const formData = new FormData();
         formData.append('description', body.description);
+        formData.append('major_req_title', body.major_req_title);
         formData.append('major_id', body.major_id);
 
         return fetch(`http://127.0.0.1:8000/major-requirement-list/`, {
