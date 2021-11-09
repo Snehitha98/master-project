@@ -207,6 +207,26 @@ function TransferEvaluationList(props) {
         return 0;
       }
 
+      function compareUnhmCoursetitle( a, b ) {
+        if ( a.major_req_title < b.major_req_title ){
+          return -1;
+        }
+        if ( a.major_req_title > b.major_req_title ){
+          return 1;
+        }
+        return 0;
+      }
+
+      function comparedescUnhmCoursetitle( a, b ) {
+        if ( a.major_req_title < b.major_req_title ){
+          return 1;
+        }
+        if ( a.major_req_title > b.major_req_title ){
+          return -1;
+        }
+        return 0;
+      }
+
       function compareApprovedStatus( a, b ) {
         if ( a.approved_status < b.approved_status ){
           return -1;
@@ -304,6 +324,12 @@ function TransferEvaluationList(props) {
         if (compareby==='descunhm'){
             setcurrentTransferEvals(props.transferEvals.sort( comparedescUnhm ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
         }
+        if (compareby==='unhmcoursetitle'){
+            setcurrentTransferEvals(props.transferEvals.sort( compareUnhmCoursetitle ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
+        if (compareby==='descunhmcoursetitle'){
+            setcurrentTransferEvals(props.transferEvals.sort( comparedescUnhmCoursetitle ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
+        }
         if (compareby==='approvedstatus'){
             setcurrentTransferEvals(props.transferEvals.sort( compareApprovedStatus ).slice(indexOfFirstTransferEval, indexOfLastTransferEval));
         }
@@ -370,11 +396,16 @@ function TransferEvaluationList(props) {
                         </div>
                     </th>
                     <th>
+                        <div>UNHM COURSE TITLE<br></br>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('unhmcoursetitle')}>asc</Button>
+                            <Button variant="outline-secondary" onClick={() => sortFunc('descunhmcoursetitle')}>desc</Button>
+                        </div>
+                    </th>
+                    <th>
                         <div>APPROVED STATUS<br></br>
                             <Button variant="outline-secondary" onClick={() => sortFunc('approvedstatus')}>asc</Button>
                             <Button variant="outline-secondary" onClick={() => sortFunc('descapprovedstatus')}>desc</Button>
                         </div>
-
                     </th>
                     <th>
                         <div>APPROVER NAME<br></br>
@@ -412,6 +443,9 @@ function TransferEvaluationList(props) {
                             </td>
                             <td onClick={transferEvalClicked(transferEval)}>
                                 {transferEval.unhm_eq}
+                            </td>
+                            <td onClick={transferEvalClicked(transferEval)}>
+                                {transferEval.major_req_title}
                             </td>
                             <td onClick={transferEvalClicked(transferEval)}>
                                 {transferEval.approved_status}

@@ -20,10 +20,12 @@ class transferEvaluationSerializer(serializers.ModelSerializer):
             'approver_id',
             'major',
             'school',
+            'state',
             'school_id',
             'course_number',
             'course_title',
             'unhm_eq',
+            'major_req_title',
             'approver',
             'major_id',
         ]

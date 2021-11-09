@@ -31,7 +31,6 @@ def import_data(request):
     courses.extend(data[1])
     approvers.extend(data[2])
     major_reqs.extend(data[3])
-    print(major_reqs)
     evals.extend(data[4])
     # import_school(schools)
     import_course(courses)
@@ -103,7 +102,6 @@ def import_requirement(major_reqs):
     """
     count = 1
     major_req_list = []
-    print(major_reqs)
     for req in major_reqs:
         if req not in major_req_list:
             req_data = MajorRequirement(count, req[1], req[2], req[0])

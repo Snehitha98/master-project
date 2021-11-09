@@ -11,6 +11,7 @@ export class API {
         formData.append('major_id', body.major_id)
         formData.append('school_id', body.school_id)
         formData.append('major_req_id', body.major_req_id)
+        // formData.append('major_req_title', body.major_req_title)
         formData.append('sem_year_taken', body.sem_year_taken)
         formData.append('approved_status', body.approved_status)
         formData.append('notes', body.notes)

@@ -38,6 +38,9 @@ class Transferevaluation(models.Model):
     def school(self):
         return str(self.transfer_course_id.school_id.school_name)
 
+    def state(self):
+        return str(self.transfer_course_id.school_id.state_name)
+
     def school_id(self):
         return str(self.transfer_course_id.school_id.school_id)
 
@@ -49,6 +52,9 @@ class Transferevaluation(models.Model):
 
     def unhm_eq(self):
         return str(self.major_req_id.description)
+
+    def major_req_title(self):
+        return str(self.major_req_id.major_req_title)
 
     def approver(self):
         return str(self.approver_id)
