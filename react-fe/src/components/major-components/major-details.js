@@ -8,8 +8,8 @@ function MajorDetails(props) {
 
                 <div>
                     <h5><i>Major details</i></h5><br/>
-                    <em>&nbsp;Major ID: {props.major.major_id}</em><br/>
-                    <em>&nbsp;Major name: {props.major.major_name}</em>
+                    {/*<em>&nbsp;Major ID: {props.major.major_id}</em><br/>*/}
+                    <strong>&nbsp;Major name:</strong> {props.major.major_name}
                 </div>
             ) : null}
         </div>

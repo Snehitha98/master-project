@@ -15,18 +15,18 @@ function TransferEvaluationDetails(props) {
         </Modal.Header>
 
         <Modal.Body>
-            <em> &nbsp;Transfer Eval ID: {props.transferEval.transfer_eval_id}</em><br />
-            <em> &nbsp;Major name: {props.transferEval.major}</em><br />
-            <em> &nbsp;School name: {props.transferEval.school}</em><br/>
-            <em> &nbsp;State name: {props.transferEval.state}</em><br/>
-            <em> &nbsp;Transfer Course title: {props.transferEval.course_title}</em><br />
-            <em> &nbsp;Transfer Course number: {props.transferEval.course_number}</em><br />
-            <em> &nbsp;UNHM Course #: {props.transferEval.unhm_eq}</em><br />
-            <em> &nbsp;UNHM Course title: {props.transferEval.major_req_title}</em><br />
-            <em> &nbsp;Approved Status: {props.transferEval.approved_status}</em><br />
-            <em> &nbsp;Approver: {props.transferEval.approver}</em><br />
-            <em> &nbsp;Expiration date: {props.transferEval.expiration_date}</em><br />
-            <em> &nbsp;Notes: {props.transferEval.notes}</em><br />
+            {/*<em> &nbsp;Transfer Eval ID: {props.transferEval.transfer_eval_id}</em><br />*/}
+            <strong> &nbsp;Major name: </strong> {props.transferEval.major}<br />
+            <strong> &nbsp;School name:</strong> {props.transferEval.school}<br/>
+            <strong> &nbsp;State name:</strong> {props.transferEval.state}<br/>
+            <strong> &nbsp;Transfer Course title:</strong> {props.transferEval.course_title}<br />
+            <strong> &nbsp;Transfer Course number:</strong> {props.transferEval.course_number}<br />
+            <strong> &nbsp;UNHM Course #:</strong> {props.transferEval.unhm_eq}<br />
+            <strong> &nbsp;UNHM Course title: </strong> {props.transferEval.major_req_title}<br />
+            <strong> &nbsp;Approved Status:</strong> {props.transferEval.approved_status}<br />
+            <strong> &nbsp;Approver: </strong> {props.transferEval.approver}<br />
+            <strong> &nbsp;Expiration date: </strong> {props.transferEval.expiration_date}<br />
+            <strong> &nbsp;Notes: </strong> {props.transferEval.notes}<br />
         </Modal.Body>
         </Modal.Dialog>
     )

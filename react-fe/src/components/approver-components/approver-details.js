@@ -9,8 +9,8 @@ function ApproverDetails(props) {
             {approv ? (
                 <div>
                     <h5><i>Approver details</i></h5><br/>
-                    <em>&nbsp;Approver ID: {approv.approver_id}</em><br/>
-                    <em>&nbsp;Approver name: {approv.approver_name}</em>
+                    {/*<em>&nbsp;Approver ID: {approv.approver_id}</em><br/>*/}
+                    <strong>&nbsp;Approver name:</strong> {approv.approver_name}
                 </div>
             ) : null}
         </div>

@@ -7,10 +7,10 @@ function MajorRequirementDetails(props) {
             {props.majorReq ? (
                 <div>
                     <h5><i>UNHM Course details</i></h5><br />
-                    <em> &nbsp;UNHM Course ID: {props.majorReq.major_req_id}</em><br />
-                    <em> &nbsp;UNHM Course #: {props.majorReq.description}</em><br />
-                    <em> &nbsp;UNHM Course Title: {props.majorReq.major_req_title}</em><br />
-                    <em> &nbsp;Major name: {props.majorReq.major}</em><br />
+                    {/*<em> &nbsp;UNHM Course ID: {props.majorReq.major_req_id}</em><br />*/}
+                    <strong> &nbsp;UNHM Course #:</strong> {props.majorReq.description}<br />
+                    <strong> &nbsp;UNHM Course Title:</strong> {props.majorReq.major_req_title}<br />
+                    <strong> &nbsp;Major name:</strong> {props.majorReq.major}<br />
                 </div>
             ) : null}
         </div>
