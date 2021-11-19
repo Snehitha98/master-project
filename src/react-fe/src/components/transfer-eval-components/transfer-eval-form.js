@@ -170,6 +170,7 @@ function TransferEvaluationForm(props) {
                     }
                 });
                 e.preventDefault();
+
     };
 
     const createClicked =  (e) => {
@@ -280,25 +281,24 @@ function TransferEvaluationForm(props) {
 
         return(
             <div>
-
                         <Form.Label htmlFor="subjectnumber">Transfer course #</Form.Label>
                         <Form.Control id="subjectnumber" type="text" placeholder="Enter course number"
                             value={subjectNumber} ref={subjectNumberRef} onChange={evt => setSubjectNumber(evt.target.value)}/>
                         <Form.Label htmlFor="name">Transfer course title</Form.Label>
                         <Form.Control id="name" type="text" placeholder="Enter course title"
                             value={title} ref={titleRef} onChange={evt => setTitle(evt.target.value)}/>
-                        <Form.Label htmlFor="school">School name</Form.Label>
-                            <select id='school'
-                                    className='form-control'
-                                    value={school_id}
-                                    onChange={evt => setSchoolId(evt.target.value)}>
-                                <option>----select----</option>
-                                { schools && schools.map( school => {
-                                    return (
-                                        <option key={school.school_id} value={school.school_id}>{school.school_name}</option>
-                                    )
-                                })}
-                            </select>
+                        {/*<Form.Label htmlFor="school">School name</Form.Label>*/}
+                        {/*    <select id='school'*/}
+                        {/*            className='form-control'*/}
+                        {/*            value={school_id}*/}
+                        {/*            onChange={evt => setSchoolId(evt.target.value)}>*/}
+                        {/*        <option>----select----</option>*/}
+                        {/*        { schools && schools.map( school => {*/}
+                        {/*            return (*/}
+                        {/*                <option key={school.school_id} value={school.school_id}>{school.school_name}</option>*/}
+                        {/*            )*/}
+                        {/*        })}*/}
+                        {/*    </select>*/}
                 </div>
         )
     }
@@ -309,41 +309,26 @@ function TransferEvaluationForm(props) {
 
                 <div>
                         <Form.Label htmlFor="name">UNHM course #</Form.Label>
-                        <Form.Control id="name" type="text" placeholder="Enter course #"
+                        <Form.Control id="name" type="text" placeholder="Enter course number"
                             value={description} ref={descriptionRef} onChange={evt => setDescription(evt.target.value)}/>
                         <Form.Label htmlFor="unhm">UNHM course title</Form.Label>
                         <Form.Control id="unhm" type="text" placeholder="Enter course title"
                             value={majorreqtitle} ref={majorreqtitleRef} onChange={evt => setMajorreqtitle(evt.target.value)}/>
-                        <Form.Label htmlFor="school">Major name</Form.Label>
-                            <select id='major'
-                                    className='form-control'
-                                    value={major_id}
-                                    onChange={evt => setMajorId(evt.target.value)}>
-                                    <option>----select----</option>
-                                { majors && majors.map( major => {
-                                    return (
-                                        <option key={major.major_id} value={major.major_id}>{major.major_name}</option>
-                                    )
-                                })}
-                            </select>
+                        {/*<Form.Label htmlFor="school">Major name</Form.Label>*/}
+                        {/*    <select id='major'*/}
+                        {/*            className='form-control'*/}
+                        {/*            value={major_id}*/}
+                        {/*            onChange={evt => setMajorId(evt.target.value)}>*/}
+                        {/*            <option>----select----</option>*/}
+                        {/*        { majors && majors.map( major => {*/}
+                        {/*            return (*/}
+                        {/*                <option key={major.major_id} value={major.major_id}>{major.major_name}</option>*/}
+                        {/*            )*/}
+                        {/*        })}*/}
+                        {/*    </select>*/}
                 </div>
         )
     }
-
-    // const NewSchool = () => {
-    //
-    //     return(
-    //
-    //             <div>
-    //                     <Form.Label htmlFor="name">Institution Name</Form.Label>
-    //                     <Form.Control id="name" type="text" placeholder="Enter institution name"
-    //                         value={school} ref={schoolRef} onChange={evt => setSchool(evt.target.value)}/>
-    //                     <Form.Label htmlFor="name">State Name</Form.Label>
-    //                     <Form.Control id="name" type="text" placeholder="Enter state name"
-    //                         value={state} ref={stateRef}  onChange={evt => setState(evt.target.value)}/>
-    //             </div>
-    //     )
-    // }
 
     return (
         <div style={{ display: 'flex',  justifyContent:'center', alignItems:'center' , padding:'20px'}}>
@@ -361,8 +346,7 @@ function TransferEvaluationForm(props) {
                                     )
                                 })}
                     </select>
-                    {/*<div style={{ display:'flex', flexDirection:'row'}}>*/}
-                    {/*    <div style={{ width:"250px"}}>*/}
+
                         <Form.Label htmlFor="school">School</Form.Label>
                         <select id="school"
                                 className='form-control'
@@ -375,52 +359,30 @@ function TransferEvaluationForm(props) {
                                         )
                                     })}
                         </select>
-                        {/*</div>*/}
+                    <br />
+
+                    {/*<div style={{ display:'flex', flexDirection:'row'}}>*/}
+                    {/*    <div style={{ width:"250px"}}>*/}
+                    {/*    <Form.Label htmlFor="tcnumber">Transfer course number</Form.Label>*/}
+                    {/*    <select id="tcnumber"*/}
+                    {/*            className='form-control'*/}
+                    {/*            value={transfer_course_id}*/}
+                    {/*            onChange={evt => setTransferCourseId(evt.target.value)}>*/}
+                    {/*                <option>----select----</option>*/}
+                    {/*                {transferCourses && transferCourses.map( tc => {*/}
+                    {/*                    return (*/}
+                    {/*                        <option key={tc.transfer_course_id} value={tc.transfer_course_id}>{tc.subject_number} </option>*/}
+                    {/*                    )*/}
+                    {/*                })}*/}
+                    {/*    </select>*/}
+                    {/*    </div>*/}
 
                     {/*    <p style={{ width:"150px", paddingTop:"50px"}}>OR</p>*/}
-
-                    {/*    <div style={{ width:"500px"}}>*/}
-                    {/*        <NewSchool/>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {/*<br />*/}
-
-                    {/*<Form.Label htmlFor="state">State</Form.Label>*/}
-                    {/*<select id="state"*/}
-                    {/*        className='form-control'*/}
-                    {/*        value={school_id}*/}
-                    {/*        onChange={evt => setSchoolId(evt.target.value)}>*/}
-                    {/*            <option>----select----</option>*/}
-                    {/*            {schools && schools.map( school => {*/}
-                    {/*                return (*/}
-                    {/*                    <option key={school.school_id} value={school.school_id}>{school.state_name} </option>*/}
-                    {/*                )*/}
-                    {/*            })}*/}
-                    {/*</select><br />*/}
-
-
-                    <div style={{ display:'flex', flexDirection:'row'}}>
-                        <div style={{ width:"250px"}}>
-                        <Form.Label htmlFor="tcnumber">Transfer course number</Form.Label>
-                        <select id="tcnumber"
-                                className='form-control'
-                                value={transfer_course_id}
-                                onChange={evt => setTransferCourseId(evt.target.value)}>
-                                    <option>----select----</option>
-                                    {transferCourses && transferCourses.map( tc => {
-                                        return (
-                                            <option key={tc.transfer_course_id} value={tc.transfer_course_id}>{tc.subject_number} </option>
-                                        )
-                                    })}
-                        </select>
-                        </div>
-
-                        <p style={{ width:"150px", paddingTop:"50px"}}>OR</p>
 
                         <div style={{ width:"500px"}}>
                             <NewTransferCourse/>
                         </div>
-                    </div>
+                    {/*</div>*/}
                     <br />
 
                     <div style={{ display:'flex', flexDirection:'row'}}>
