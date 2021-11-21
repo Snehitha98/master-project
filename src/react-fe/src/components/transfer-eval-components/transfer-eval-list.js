@@ -14,7 +14,6 @@ function TransferEvaluationList(props) {
     // Get current transfer evals
     const indexOfLastTransferEval = currentPage * transferEvalsPerPage;
     const indexOfFirstTransferEval = indexOfLastTransferEval - transferEvalsPerPage;
-    // const currentTransferEvals = props.transferEvals.slice(indexOfFirstTransferEval, indexOfLastTransferEval);
     const [currentTransferEvals,setcurrentTransferEvals] = useState(props.transferEvals.slice(indexOfFirstTransferEval, indexOfLastTransferEval));
 
     const [selectedMajorName, setselectedMajorName] = useState('');
@@ -23,21 +22,26 @@ function TransferEvaluationList(props) {
     const [selectedSchoolName, setselectedSchoolName] = useState('');
     const [schoolNamesArr,setschoolNamesArr] = useState(['select']);
 
+    const [selectedCourseNum, setselectedCourseNum] = useState('');
+    const [courseNumArr,setcourseNumArr] = useState(['select']);
+
     useEffect(() => {
         let temp = props.transferEvals;
         temp = selectedMajorName ? temp.filter(word => word.major === selectedMajorName) : temp;
         temp = selectedSchoolName ? temp.filter(word => word.school === selectedSchoolName) : temp;
+        temp = selectedCourseNum ? temp.filter(word => word.course_number === selectedCourseNum) : temp;
         setcurrentTransferEvals(temp.slice(indexOfFirstTransferEval, indexOfLastTransferEval));
 
         setmajorNamesArr([...new Set(props.transferEvals.map(item => item.major))])
-
-        // setschoolNamesArr([...new Set(props.transferEvals.map(item => item.school))])
-      }, [props.transferEvals,currentPage,selectedMajorName,selectedSchoolName])
+      }, [props.transferEvals,currentPage,selectedMajorName,selectedSchoolName,selectedCourseNum])
 
     useEffect(()=>{
       let temp = props.transferEvals.filter(word => word.major === selectedMajorName);
       setschoolNamesArr([...new Set(temp.map(item => item.school))])
-    },[selectedMajorName])
+      let temp1 = props.transferEvals.filter(word => word.school === selectedSchoolName);
+      setcourseNumArr([...new Set(temp1.map(item => item.course_number))])
+    },[props.transferEvals, selectedMajorName, selectedSchoolName])
+
 
     const MajorSelect = () =>{
       function MajorOptions(){
@@ -77,6 +81,28 @@ function TransferEvaluationList(props) {
                 onChange={evt => setselectedSchoolName(evt.target.value)}>
                   <option>----Select Institution Name----</option>
                   <SchoolOptions/>
+              </Form.Control>
+        </Form.Group>
+      )
+    }
+
+    const CourseSelect = () =>{
+      function CourseOptions(){
+        return courseNumArr.map(
+          (eachName,i) => {
+            return  <option key={i}>{eachName}</option>
+          }
+        )
+      }
+
+      return(
+        <Form.Group as={Col} controlId="formGridEmail">
+              <Form.Label>Course Number</Form.Label>
+              <Form.Control as="select" size="sm" custom
+                  value={selectedCourseNum}
+                  onChange={evt => setselectedCourseNum(evt.target.value)}>
+                <option>----Select course Number----</option>
+                <CourseOptions/>
               </Form.Control>
         </Form.Group>
       )
@@ -358,6 +384,7 @@ function TransferEvaluationList(props) {
             <Form.Row >
               <MajorSelect/>
               <SchoolSelector/>
+              <CourseSelect/>
               </Form.Row>
             </Form.Group>
           </Form>
