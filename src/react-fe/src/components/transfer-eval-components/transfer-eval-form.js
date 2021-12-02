@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { API } from '../../api-services/transfer-eval-service';
-import { Form, Modal, Button, Col } from 'react-bootstrap';
+import {Form, Modal, Button, Col, Nav} from 'react-bootstrap';
 import '../../App.css';
 import TransferCourseForm from '../transfer-course-components/transfer-course-form';
 import { TCAPI } from '../../api-services/transfer-course-service';
@@ -249,8 +249,6 @@ function TransferEvaluationForm(props) {
 
             }, 1000);
 
-
-
             }
         secondFunction();
         e.preventDefault();
@@ -287,18 +285,6 @@ function TransferEvaluationForm(props) {
                         <Form.Label htmlFor="name">Transfer course title</Form.Label>
                         <Form.Control id="name" type="text" placeholder="Enter course title"
                             value={title} ref={titleRef} onChange={evt => setTitle(evt.target.value)}/>
-                        {/*<Form.Label htmlFor="school">School name</Form.Label>*/}
-                        {/*    <select id='school'*/}
-                        {/*            className='form-control'*/}
-                        {/*            value={school_id}*/}
-                        {/*            onChange={evt => setSchoolId(evt.target.value)}>*/}
-                        {/*        <option>----select----</option>*/}
-                        {/*        { schools && schools.map( school => {*/}
-                        {/*            return (*/}
-                        {/*                <option key={school.school_id} value={school.school_id}>{school.school_name}</option>*/}
-                        {/*            )*/}
-                        {/*        })}*/}
-                        {/*    </select>*/}
                 </div>
         )
     }
@@ -314,26 +300,74 @@ function TransferEvaluationForm(props) {
                         <Form.Label htmlFor="unhm">UNHM course title</Form.Label>
                         <Form.Control id="unhm" type="text" placeholder="Enter course title"
                             value={majorreqtitle} ref={majorreqtitleRef} onChange={evt => setMajorreqtitle(evt.target.value)}/>
-                        {/*<Form.Label htmlFor="school">Major name</Form.Label>*/}
-                        {/*    <select id='major'*/}
-                        {/*            className='form-control'*/}
-                        {/*            value={major_id}*/}
-                        {/*            onChange={evt => setMajorId(evt.target.value)}>*/}
-                        {/*            <option>----select----</option>*/}
-                        {/*        { majors && majors.map( major => {*/}
-                        {/*            return (*/}
-                        {/*                <option key={major.major_id} value={major.major_id}>{major.major_name}</option>*/}
-                        {/*            )*/}
-                        {/*        })}*/}
-                        {/*    </select>*/}
                 </div>
         )
     }
 
     return (
         <div style={{ display: 'flex',  justifyContent:'center', alignItems:'center' , padding:'20px'}}>
-            {props.transferEval ? (
+            {props.transferEval.transfer_eval_id ? (
                 <Form id='form-css'>
+                    <header className="App-header">
+              <div style={{ display: 'flex', alignItems:'center' }}>
+                <h3>Update Form</h3>
+                  <br />
+              </div>
+            </header>
+                    <Form.Label htmlFor="approver">Approver name</Form.Label>
+                    <select id="approver"
+                            className='form-control'
+                            value={approver_id}
+                            onChange={evt => setApproverId(evt.target.value)}>
+                                <option>----select----</option>
+                                {approvers && approvers.map( app => {
+                                    return (
+                                        <option key={app.approver_id} value={app.approver_id}>{app.approver_name} </option>
+                                    )
+                                })}
+                    </select>
+                    <Form.Label htmlFor="approved_status">Approved status</Form.Label>
+                    <select id="approved_status"
+                            className='form-control'
+                            value={approvedStatus}
+                            onChange={evt => setApprovedStatus(evt.target.value)}>
+                                <option>----select----</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                    </select>
+                    <Form.Label htmlFor="expiration">Expiration date</Form.Label>
+                    <Form.Control id="expiration" type="date" placeholder="dd.MM.yyyy"
+                        value={expirationDate} onChange={evt => setExpirationDate(evt.target.value)}/><br/>
+                    {
+                        errorMsg ?
+                        <p style={{color:'red'}}> Error {errorMsg} the transfer eval</p>
+                        : null
+                    }
+                    <Button variant="outline-success" type="submit" onClick={updateClicked}>Update</Button>
+                    &nbsp;&nbsp;
+                    <Button variant="outline-danger" type="submit" onClick={cancelClicked}>Cancel</Button>
+                    <br />
+                    <br />
+                    <div style={{ width:"900px"}}>
+                           <h5>To update below Transfer Course details go to Transfer Course page
+                               <Nav.Link href="/transfer-course">Transfer Course</Nav.Link></h5>
+                    </div>
+                    <NewTransferCourse/>
+                    <br />
+                    <div style={{ width:"900px"}}>
+                            <h5>To update below UNHM Course details go to UNHM Course page
+                               <Nav.Link href="/major-req">UNHM Course</Nav.Link></h5>
+                    </div>
+                    <NewUNHM/>
+                </Form>
+            ) :
+                <Form id='form-css'>
+                    <header className="App-header">
+              <div style={{ display: 'flex', alignItems:'center' }}>
+                <h3>Create Form</h3>
+                  <br />
+              </div>
+            </header>
                     <Form.Label htmlFor="major">Major</Form.Label>
                     <select id="major"
                             className='form-control'
@@ -361,28 +395,9 @@ function TransferEvaluationForm(props) {
                         </select>
                     <br />
 
-                    {/*<div style={{ display:'flex', flexDirection:'row'}}>*/}
-                    {/*    <div style={{ width:"250px"}}>*/}
-                    {/*    <Form.Label htmlFor="tcnumber">Transfer course number</Form.Label>*/}
-                    {/*    <select id="tcnumber"*/}
-                    {/*            className='form-control'*/}
-                    {/*            value={transfer_course_id}*/}
-                    {/*            onChange={evt => setTransferCourseId(evt.target.value)}>*/}
-                    {/*                <option>----select----</option>*/}
-                    {/*                {transferCourses && transferCourses.map( tc => {*/}
-                    {/*                    return (*/}
-                    {/*                        <option key={tc.transfer_course_id} value={tc.transfer_course_id}>{tc.subject_number} </option>*/}
-                    {/*                    )*/}
-                    {/*                })}*/}
-                    {/*    </select>*/}
-                    {/*    </div>*/}
-
-                    {/*    <p style={{ width:"150px", paddingTop:"50px"}}>OR</p>*/}
-
                         <div style={{ width:"500px"}}>
                             <NewTransferCourse/>
                         </div>
-                    {/*</div>*/}
                     <br />
 
                     <div style={{ display:'flex', flexDirection:'row'}}>
@@ -439,16 +454,14 @@ function TransferEvaluationForm(props) {
                         : null
                     }
                     { props.transferEval.transfer_eval_id ?
-                            <Button variant="outline-success" type="submit" onClick={updateClicked}>
-                                Update
-                            </Button> :
+                            null :
                             <Button variant="outline-success" type="submit" onClick={createClicked}>
                                 Create
                             </Button>
                         }&nbsp;&nbsp;
                     <Button variant="outline-danger" type="submit" onClick={cancelClicked}>Cancel</Button>
                 </Form>
-            ) : null }
+            }
         </div>
     )
 }

@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import TransferEvaluationList from './transfer-eval-components/transfer-eval-list';
 import TransferEvaluationDetails from './transfer-eval-components/transfer-eval-details';
 import TransferEvaluationForm from './transfer-eval-components/transfer-eval-form';
-import NewForm from './transfer-eval-components/new-form';
 
 
 function TransferEvaluation() {
@@ -12,7 +11,6 @@ function TransferEvaluation() {
     const [transferEvals, setTransferEvals] = useState([]);
     const [selectedTransferEval, setSelectedTransferEval] = useState(null);
     const [editedTransferEval, setEditedTransferEval] = useState(null);
-    // This is for transfer course api Service;
     const [courses, setCourses] = useState([]);
     const [transferCourseId, setTransferCourseId] = useState('');
     const [majorReqs, setMajorReqs] = useState([]);
@@ -60,7 +58,7 @@ function TransferEvaluation() {
     }
 
     const newTransferEval = () => {
-      setEditedTransferEval({transfer_course_id: '', major_req_id:'', sem_year_taken:'', expiration_date: '', approved_status: '', notes:'', approver_id:''});
+      setEditedTransferEval({transfer_course_id: '', major_req_id:'', expiration_date: '', approved_status: '', notes:'', approver_id:''});
       setSelectedTransferEval(null);
     }
 
@@ -87,7 +85,6 @@ function TransferEvaluation() {
     }
 
     const transferEvalCreated = transferEval => {
-      // debugger;
       const newTransferEvals = [...transferEvals, transferEval];
       setTransferEvals(newTransferEvals);
       setSelectedTransferEval(null);
@@ -112,12 +109,6 @@ function TransferEvaluation() {
 
     return (
         <div>
-          <br/>
-            <header className="App-header">
-              <div style={{ display: 'flex', alignItems:'center' }}>
-                <h2>Transfer evaluations</h2>
-              </div>
-            </header>
             <div className="transfereval">
                 {!selectedTransferEval && !editedTransferEval ?
                 <TransferEvaluationList
@@ -149,23 +140,6 @@ function TransferEvaluation() {
             </div>
         </div>
       )
-
 }
-
 export default withRouter(TransferEvaluation);
 
-/*
-{selectedTransferEval ?
-                <TransferEvaluationDetails
-                  transferEval={selectedTransferEval}
-                  updateTransferEval={loadTransferEval}
-                />
-                : null }
-                {editedTransferEval ?
-                <TransferEvaluationForm
-                  transferEval={editedTransferEval}
-                  updatedTransferEval={updatedTransferEval}
-                  transferEvalCreated={transferEvalCreated}
-                />
-                : null}
-*/

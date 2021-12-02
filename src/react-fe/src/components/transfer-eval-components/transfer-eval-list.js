@@ -9,7 +9,7 @@ import { API } from '../../api-services/transfer-eval-service';
 function TransferEvaluationList(props) {
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [transferEvalsPerPage] = useState(8);
+    const [transferEvalsPerPage] = useState(50);
 
     // Get current transfer evals
     const indexOfLastTransferEval = currentPage * transferEvalsPerPage;
@@ -381,6 +381,11 @@ function TransferEvaluationList(props) {
         <>
         <Form style={{ display: 'flex',alignItems:'center'}}>
             <Form.Group controlId="exampleForm.SelectCustom">
+                <header className="App-header">
+              <div style={{ display: 'flex', alignItems:'center' }}>
+                <h2>Transfer evaluations</h2>
+              </div>
+            </header>
             <Form.Row >
               <MajorSelect/>
               <SchoolSelector/>
