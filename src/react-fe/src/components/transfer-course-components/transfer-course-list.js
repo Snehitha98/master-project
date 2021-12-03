@@ -9,7 +9,7 @@ import { TCAPI } from '../../api-services/transfer-course-service';
 function TransferCourseList(props) {
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [coursesPerPage] = useState(8);
+    const [coursesPerPage] = useState(50);
 
     // Get current transfer evals
     const indexOfLastCourse = currentPage * coursesPerPage;
@@ -165,9 +165,28 @@ function TransferCourseList(props) {
         <Container>
             <Form style={{ display: 'flex',alignItems:'center'}}>
             <Form.Group controlId="exampleForm.SelectCustom">
-            <Form.Row >
-              <SchoolSelector/>
-              </Form.Row>
+
+                <Table striped bordered hover>
+                    <thead>
+                    <tr>
+                        <th>
+                            <Form.Row >
+                            <SchoolSelector/>
+                             </Form.Row>
+                        </th>
+
+                            <td>
+                                <br/>
+                                <button type="button" className="btn btn-outline-success"
+                                        onClick={newTransferCourse}>Create
+                                </button>
+                            </td>
+
+                    </tr>
+                    </thead>
+                </Table>
+
+
             </Form.Group>
           </Form>
         <Table striped bordered hover>
@@ -193,9 +212,9 @@ function TransferCourseList(props) {
                         </div>
                     </th>
                     <th/>
-                    <th>
-                        <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newTransferCourse}/>
-                    </th>
+                    {/*<th>*/}
+                        {/*<FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newTransferCourse}/>*/}
+                    {/*</th>*/}
                 </tr>
             </thead>
             <tbody>

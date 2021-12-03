@@ -81,9 +81,9 @@ function ApproverList(props) {
             </div>
             </th>
           <th/>
-          <th>
-            <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newApprover}/>
-          </th>
+            <th>
+                <button type="button" className="btn btn-outline-success" onClick={newApprover}>Create</button>
+            </th>
         </tr>
       </thead>
       <tbody>

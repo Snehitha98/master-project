@@ -72,7 +72,7 @@ function MajorList(props) {
             </th>
             <th />
             <th>
-                <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newMajor}/>
+                <button type="button" className="btn btn-outline-success" onClick={newMajor}>Create</button>
             </th>
             </tr>
         </thead>

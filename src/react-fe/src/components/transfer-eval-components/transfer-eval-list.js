@@ -386,11 +386,23 @@ function TransferEvaluationList(props) {
                 <h2>Transfer evaluations</h2>
               </div>
             </header>
-            <Form.Row >
-              <MajorSelect/>
-              <SchoolSelector/>
-              <CourseSelect/>
-              </Form.Row>
+                <Table striped bordered hover>
+                    <thead>
+                    <tr>
+                        <th>
+                        <Form.Row >
+                         <MajorSelect/>
+                         <SchoolSelector/>
+                         <CourseSelect/>
+                         </Form.Row>
+                        </th>
+                        <td>
+                            <br />
+                            <button type="button" class="btn btn-outline-success" onClick={newTransferEval}>Create</button>
+                        </td>
+                    </tr>
+                    </thead>
+                </Table>
             </Form.Group>
           </Form>
         <Table striped bordered hover>
@@ -452,9 +464,9 @@ function TransferEvaluationList(props) {
                         </div>
                     </th>
                     <th/>
-                    <th>
-                        <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newTransferEval}/>
-                    </th>
+                    {/*<th>*/}
+                    {/*    <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newTransferEval}/>*/}
+                    {/*</th>*/}
                 </tr>
             </thead>
             <tbody>

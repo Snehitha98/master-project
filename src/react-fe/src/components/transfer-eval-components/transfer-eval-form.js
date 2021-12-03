@@ -310,7 +310,7 @@ function TransferEvaluationForm(props) {
                 <Form id='form-css'>
                     <header className="App-header">
               <div style={{ display: 'flex', alignItems:'center' }}>
-                <h3>Update Form</h3>
+                <h3>Edit Transfer Evaluation</h3>
                   <br />
               </div>
             </header>
@@ -364,7 +364,7 @@ function TransferEvaluationForm(props) {
                 <Form id='form-css'>
                     <header className="App-header">
               <div style={{ display: 'flex', alignItems:'center' }}>
-                <h3>Create Form</h3>
+                <h3>Create New Transfer Evaluation</h3>
                   <br />
               </div>
             </header>

@@ -102,7 +102,7 @@ function SchoolList(props) {
                     </th>
                     <th />
                     <th>
-                        <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newSchool}/>
+                        <button type="button" className="btn btn-outline-success" onClick={newSchool}>Create</button>
                     </th>
                 </tr>
             </thead>

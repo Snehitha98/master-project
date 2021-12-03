@@ -9,7 +9,7 @@ import { MRAPI } from '../../api-services/major-req-service';
 function MajorRequirementList(props) {
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [majorReqsPerPage] = useState(8);
+    const [majorReqsPerPage] = useState(50);
 
     // Get current transfer evals
     const indexOfLastMajorReq = currentPage * majorReqsPerPage;
@@ -175,9 +175,27 @@ function MajorRequirementList(props) {
         <Container>
             <Form style={{ display: 'flex',alignItems:'center'}}>
             <Form.Group controlId="exampleForm.SelectCustom">
-            <Form.Row >
-              <MajorSelect/>
-              </Form.Row>
+
+                <Table striped bordered hover>
+                    <thead>
+                    <tr>
+                        <th>
+                            <Form.Row >
+                            <MajorSelect/>
+                            </Form.Row>
+                        </th>
+
+                            <td>
+                                <br/>
+                                <button type="button" className="btn btn-outline-success"
+                                        onClick={newMajorReq}>Create
+                                </button>
+                            </td>
+
+                    </tr>
+                    </thead>
+                </Table>
+
             </Form.Group>
           </Form>
         <Table striped bordered hover>
@@ -201,10 +219,9 @@ function MajorRequirementList(props) {
                         <Button variant="outline-secondary" onClick={() => sortFunc('descmajorreq')}>desc</Button>
                     </div>
                     </th>
-
-                    <th>
-                        <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newMajorReq}/>
-                    </th>
+                    {/*<th>*/}
+                    {/*    <FontAwesomeIcon icon={faPlus} alignmentBaseline='before-edge' onClick={newMajorReq}/>*/}
+                    {/*</th>*/}
                 </tr>
             </thead>
             <tbody>
