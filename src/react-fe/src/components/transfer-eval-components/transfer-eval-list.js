@@ -390,6 +390,7 @@ function TransferEvaluationList(props) {
                     <thead>
                     <tr>
                         <th>
+                            <h5 className="text-success">Search</h5>
                         <Form.Row >
                          <MajorSelect/>
                          <SchoolSelector/>
@@ -397,7 +398,7 @@ function TransferEvaluationList(props) {
                          </Form.Row>
                         </th>
                         <td>
-                            <br />
+                            <br /><br />
                             <button type="button" class="btn btn-outline-success" onClick={newTransferEval}>Create</button>
                         </td>
                     </tr>

@@ -180,13 +180,14 @@ function MajorRequirementList(props) {
                     <thead>
                     <tr>
                         <th>
+                            <h5 className="text-success">Search</h5>
                             <Form.Row >
                             <MajorSelect/>
                             </Form.Row>
                         </th>
 
                             <td>
-                                <br/>
+                                <br/><br />
                                 <button type="button" className="btn btn-outline-success"
                                         onClick={newMajorReq}>Create
                                 </button>
